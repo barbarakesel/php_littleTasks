@@ -48,14 +48,86 @@ function sortArray($array) // сортировка массива без фун�
 
 sortArray($arr);
 
-function wordFrequency($wordFrequency) //
+$text = "My family is very important to me. We do lots of things together. My brothers and I like to go on long walks in the mountains. ";
+
+function wordFrequency($wordFrequency) //количество вхождений словa в строку
 {
 
+    $text = strtolower(preg_replace("/[^\w\s]/", "", $wordFrequency));
+    $text = explode(" ", $text);
+    $wCount =[];
+    foreach ($text as $word) {
+        if (!empty($word)) {
+        if (!isset($wCount[$word])) {
+            $wCount[$word] = 1;
+        } else {
+            $wCount[$word]++;
+        }
+        }
+    }
+
+
+    foreach ($wCount as $word => $count) {
+        echo "$word: $count\n";
+    }
 }
+wordFrequency($text);
 function generatePassword($length) //
 {
 
 }
+
+function splitEvenOdd($arr)
+{
+    $even = [];
+    $odd = [];
+    foreach ($arr as $num){
+      if ($num%2 == 0 ){
+          array_push($even, $num);
+      }
+      else array_push($odd, $num);
+    }
+    echo "Это четные:\n";
+    foreach ($even as $value) {
+        echo $value . "\n";
+    }
+    echo "Это нечетные:\n";
+    foreach ($odd as $value) {
+        echo $value . "\n";
+    }
+}
+splitEvenOdd($arr);
+
+function longestWord($text)
+{
+    $text = strtolower(preg_replace("/[^\w\s]/", "", $text));
+    $text = explode(" ", $text);
+    $words =[];
+    for ($i = 0; $i < count($text); $i++) {
+           $words[strlen($text[$i])] = $text[$i] ;
+    }
+  return $words[max(array_keys($words))];
+}
+echo longestWord($text) . "\n";
+
+function calculate($a, $b, $operator)
+{
+    switch ($operator) {
+        case '+':
+            return $a + $b;
+        case '-':
+            return $a - $b;
+        case '*':
+            return $a * $b;
+        case '/':
+            if ($b == 0) return "b = 0";
+            else
+            return $a / $b;
+        default:
+            return "wrong operator";
+    }
+}
+echo calculate(2, 2, '+');
 /*
  * 1️⃣ Проверка палиндрома
 Написать функцию isPalindrome($string), которая проверяет, является ли строка палиндромом (учитывая, что регистр и пробелы не должны влиять на проверку).
@@ -67,7 +139,7 @@ function generatePassword($length) //
 Написать функцию sortArray($arr), которая принимает массив чисел и возвращает его, отсортированный по возрастанию (без использования sort()).
 
 4️⃣ Частота слов в тексте
-Написать функцию wordFrequency(wordFrequency), которая принимает строку и возвращает массив, где ключ — слово, а значение — количество его вхождений в строку.
+Написать функцию wordFrequency($wordFrequency), которая принимает строку и возвращает массив, где ключ — слово, а значение — количество его вхождений в строку.
 
 5️⃣ Генератор паролей
 Создать функцию generatePassword($length), которая генерирует случайный пароль заданной длины, состоящий из букв и цифр.
